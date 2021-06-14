@@ -17,10 +17,20 @@
 			{/foreach}
 		{/fbvFormSection}
 	{else}
-		{fbvFormSection list=true title="grid.category.categories"}
-			{foreach from=$categories item="category" key="id"}
-				{fbvElement type="checkbox" id="categories[]" value=$id checked=in_array($id, $assignedCategories) label=$category translate=false}
-			{/foreach}
-		{/fbvFormSection}
+		{if count($categories) > 10}
+			{fbvFormSection list=true title="grid.category.categories"}
+				<div class="pkp_categories_list">
+					{foreach from=$categories item="category" key="id"}
+						{fbvElement type="checkbox" id="categories[]" value=$id checked=in_array($id, $assignedCategories) label=$category translate=false}
+					{/foreach}
+				</div>
+			{/fbvFormSection}
+        {else}
+            {fbvFormSection list=true title="grid.category.categories"}
+				{foreach from=$categories item="category" key="id"}
+					{fbvElement type="checkbox" id="categories[]" value=$id checked=in_array($id, $assignedCategories) label=$category translate=false}
+				{/foreach}
+            {/fbvFormSection}
+        {/if}
 	{/if}
 {/if}
