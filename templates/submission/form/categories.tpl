@@ -12,20 +12,13 @@
 	$('#categoriesSearch').keyup(function()
 	{ldelim}
 		filter = $('#categoriesSearch').val().toUpperCase();
-		categories = $('#categoriesList').find('li');
 
-		for (i = 0; i < categories.length; i++)
+		$('#categoriesList li').filter(function()
 		{ldelim}
-			category = $(categories[i]).text().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-			if (category.toUpperCase().indexOf(filter) > -1)
-			{ldelim}
-				$(categories[i]).css('display','');
-			{rdelim}
-			else
-			{ldelim}
-				$(categories[i]).css('display','none');
-			{rdelim}
-		{rdelim}
+			$(this).toggle(
+				$(this).text().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase().indexOf(filter) > -1
+			)
+		{rdelim});
 	{rdelim});
 </script>
 
