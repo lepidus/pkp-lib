@@ -7,7 +7,7 @@
  *
  * Include categories for submissions.
  *}
- <script type="text/javascript">
+<script type="text/javascript">
 	$(document).ready(function()
 	{ldelim}
 		if ($('#categoriesList').find('li').length > 10)
@@ -19,12 +19,15 @@
 
 			$('#categoriesList input').click(function()
 			{ldelim}
+				categoryItem = $(this).parent().parent();
 				if ($(this).is(':checked') == true)
 				{ldelim}
+					$(categoryItem).appendTo('.assigned_categories');
 					$(this).parent().css('font-weight', '700');
 				{rdelim}
 				else
 				{ldelim}
+					$(categoryItem).appendTo('.unassigned_categories');
 					$(this).parent().css('font-weight', '400');
 				{rdelim}
 			{rdelim});
@@ -58,9 +61,20 @@
             {fbvFormSection list=true title="grid.category.categories"}
 				<input type="text" id="categoriesSearch" name="categoriesSearch" value=""/>
 				<div class="pkp_categories_list" id="categoriesList">
-					{foreach from=$categories item="category" key="id"}
-						{fbvElement type="checkbox" id="categories[]" value=$id checked=in_array($id, $assignedCategories) label=$category translate=false}
-					{/foreach}
+					<div class="unassigned_categories">
+						{foreach from=$categories item="category" key="id"}
+							{if !in_array($id, $assignedCategories)}
+								{fbvElement type="checkbox" id="categories[]" value=$id checked=in_array($id, $assignedCategories) label=$category translate=false}
+							{/if}
+						{/foreach}
+					</div>
+					<div class="assigned_categories">
+						{foreach from=$categories item="category" key="id"}
+							{if in_array($id, $assignedCategories)}
+								{fbvElement type="checkbox" id="categories[]" value=$id checked=in_array($id, $assignedCategories) label=$category translate=false}
+							{/if}
+						{/foreach}
+					</div>
 				</div>
             {/fbvFormSection}
         {else}
