@@ -8,18 +8,40 @@
  * Include categories for submissions.
  *}
  <script type="text/javascript">
-
-	$('#categoriesSearch').keyup(function()
+	$(document).ready(function()
 	{ldelim}
-		filter = $('#categoriesSearch').val().toUpperCase();
-
-		$('#categoriesList li').filter(function()
+		if ($('#categoriesList').find('li').length > 10)
 		{ldelim}
-			$(this).toggle(
-				$(this).text().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase().indexOf(filter) > -1
-			)
-		{rdelim});
-	{rdelim});
+			$('#categoriesList').find('input:checked').each(function()
+			{ldelim}
+				$(this).parent().css('font-weight', '700');
+			{rdelim});
+
+			$('#categoriesList input').click(function()
+			{ldelim}
+				if ($(this).is(':checked') == true)
+				{ldelim}
+					$(this).parent().css('font-weight', '700');
+				{rdelim}
+				else
+				{ldelim}
+					$(this).parent().css('font-weight', '400');
+				{rdelim}
+			{rdelim});
+
+			$('#categoriesSearch').keyup(function()
+			{ldelim}
+				filter = $('#categoriesSearch').val().toUpperCase();
+
+				$('#categoriesList li').filter(function()
+				{ldelim}
+					$(this).toggle(
+						$(this).text().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase().indexOf(filter) > -1
+					)
+				{rdelim});
+			{rdelim});
+		{rdelim}
+    {rdelim});
 </script>
 
 {if count($categories)}
