@@ -7,46 +7,6 @@
  *
  * Include categories for submissions.
  *}
-<script type="text/javascript">
-	$(document).ready(function()
-	{ldelim}
-		if ($('#categoriesList').find('li').length > 10)
-		{ldelim}
-			$('#categoriesList').find('input:checked').each(function()
-			{ldelim}
-				$(this).parent().css('font-weight', '700');
-			{rdelim});
-
-			$('#categoriesList input').click(function()
-			{ldelim}
-				categoryItem = $(this).parent().parent();
-				if ($(this).is(':checked') == true)
-				{ldelim}
-					$(categoryItem).appendTo('.assigned_categories');
-					$(this).parent().css('font-weight', '700');
-				{rdelim}
-				else
-				{ldelim}
-					$(categoryItem).appendTo('.unassigned_categories');
-					$(this).parent().css('font-weight', '400');
-				{rdelim}
-			{rdelim});
-
-			$('#categoriesSearch').keyup(function()
-			{ldelim}
-				filter = $('#categoriesSearch').val().toUpperCase();
-
-				$('#categoriesList li').filter(function()
-				{ldelim}
-					$(this).toggle(
-						$(this).text().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase().indexOf(filter) > -1
-					)
-				{rdelim});
-			{rdelim});
-		{rdelim}
-    {rdelim});
-</script>
-
 {if count($categories)}
     {if $readOnly}
         {fbvFormSection title="grid.category.categories" list=true}
@@ -58,6 +18,32 @@
         {/fbvFormSection}
     {else}
         {if count($categories) > 10}
+			<script>
+				$(document).ready(function() {ldelim}
+						$('#categoriesList').find('input:checked').each(function() {ldelim}
+							$(this).parent().css('font-weight', '700');
+						{rdelim});
+						$('#categoriesList input').click(function() {ldelim}
+							categoryItem = $(this).parent().parent();
+							if ($(this).is(':checked') == true) {ldelim}
+								$(categoryItem).appendTo('.assigned_categories');
+								$(this).parent().css('font-weight', '700');
+							{rdelim}
+							else {ldelim}
+								$(categoryItem).appendTo('.unassigned_categories');
+								$(this).parent().css('font-weight', '400');
+							{rdelim}
+						{rdelim});
+						$('#categoriesSearch').keyup(function() {ldelim}
+							filter = $('#categoriesSearch').val().toUpperCase();
+							$('#categoriesList li').filter(function() {ldelim}
+								$(this).toggle(
+									$(this).text().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase().indexOf(filter) > -1
+								);
+							{rdelim});
+						{rdelim});
+				{rdelim});
+			</script>
             {fbvFormSection list=true title="grid.category.categories"}
 				<input type="text" id="categoriesSearch" name="categoriesSearch" value=""/>
 				<div class="pkp_categories_list" id="categoriesList">
