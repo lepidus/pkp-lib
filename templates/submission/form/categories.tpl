@@ -45,7 +45,7 @@
 				{rdelim});
 			</script>
             {fbvFormSection list=true title="grid.category.categories"}
-				<input type="text" id="categoriesSearch" name="categoriesSearch" value=""/>
+				<input type="text" id="categoriesSearch" name="categoriesSearch" placeholder="{translate key="common.search"}" value=""/>
 				<div class="pkp_categories_list" id="categoriesList">
 					<div class="unassigned_categories">
 						{foreach from=$categories item="category" key="id"}
