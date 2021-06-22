@@ -7,12 +7,11 @@
  *
  * Categories filter for submissions.
  *}
-
 <script>
 	// Initialise JS handler.
 	$(function() {ldelim}
 		$('#categoriesFilter').pkpHandler(
-			'$.pkp.controllers.CategoriesFilterHandler'
+			'$.pkp.pages.submission.SubmissionCategoriesFilterHandler'
 		);
 	{rdelim});
 </script>
