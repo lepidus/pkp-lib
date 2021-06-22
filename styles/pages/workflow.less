@@ -287,17 +287,28 @@
 	}
 }
 
-.pkp_categories_list {
-	height: 250px;
-	overflow: hidden;
-	overflow-y: scroll;
-	border: @bg-border;
-	padding: 5px 10px;
-	display: flex;
+.pkp_categories_filter {
 
-	.assigned_categories,
-	.unassigned_categories {
-		flex: 1;
+	.categories_list {
+		height: 250px;
+		overflow: hidden;
+		overflow-y: scroll;
+		border: @bg-border;
+		padding: 5px 10px;
+		display: flex;
+
+		.assigned_categories,
+		.unassigned_categories {
+			flex: 1;
+		}
+
+		.assigned_categories li label {
+			font-weight: 700;
+		}
+
+		.unassigned_categories li label {
+			font-weight: 400;
+		}
 	}
 }
 
