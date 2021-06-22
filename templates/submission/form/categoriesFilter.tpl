@@ -9,25 +9,12 @@
  *}
 
 <script>
-    $(document).ready(function() {ldelim}
-		$('#categoriesFilter input').click(function() {ldelim}
-			categoryItem = $(this).parent().parent();
-			if ($(this).is(':checked') == true) {ldelim}
-				$(categoryItem).appendTo('.assigned_categories');
-			{rdelim}
-			else {ldelim}
-				$(categoryItem).appendTo('.unassigned_categories');
-			{rdelim}
-		{rdelim});
-		$('#search').keyup(function() {ldelim}
-			filter = $(this).val().toUpperCase();
-			$('.categories_list li').filter(function() {ldelim}
-				$(this).toggle(
-					$(this).text().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase().indexOf(filter) > -1
-				);
-			{rdelim});
-		{rdelim});
-    {rdelim});
+	// Initialise JS handler.
+	$(function() {ldelim}
+		$('#categoriesFilter').pkpHandler(
+			'$.pkp.controllers.CategoriesFilterHandler'
+		);
+	{rdelim});
 </script>
 
 <div class="pkp_categories_filter" id="categoriesFilter">
