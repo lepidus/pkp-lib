@@ -87,7 +87,7 @@
 	};
 
 	/**
-	 * Search categories by text
+	 * Remove accents for text and converts to uppercase
 	 *
 	 * @param {string} text The text that will be formatted
 	 * for the categories search
