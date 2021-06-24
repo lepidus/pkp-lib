@@ -39,7 +39,7 @@
 		$('input:checkbox', $widgetWrapper).on('click',
 				self.callbackWrapper(self.assignCategory));
 
-		$('#search', $widgetWrapper).on('keyup',
+		$('#searchCategories', $widgetWrapper).on('keyup',
 				self.callbackWrapper(self.searchCategories));
 	};
 	$.pkp.classes.Helper.inherits(

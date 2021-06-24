@@ -17,7 +17,10 @@
 </script>
 
 <div class="pkp_categories_filter" id="categoriesFilter">
-    <input type="text" name="search" id="search" placeholder="{translate key="common.search"}" value="" />
+	<input type="text" name="searchCategories" id="searchCategories" placeholder="{translate key="common.search"}">
+	<label for="searchCategories" class="-screenReader">
+		{translate key="common.search"}
+	</label>
     <div class="categories_list">
         <div class="unassigned_categories">
             {foreach from=$categories item="category" key="id"}
