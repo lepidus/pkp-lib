@@ -35,11 +35,11 @@
 
 		this.parent($widgetWrapper, options);
 		var self = this;
-
+		
 		$('input:checkbox', $widgetWrapper).on('click',
 				self.callbackWrapper(self.assignCategory));
 
-		$('#searchCategories', $widgetWrapper).on('keyup',
+		$('input:text', $widgetWrapper).on('keyup',
 				self.callbackWrapper(self.searchCategories));
 	};
 	$.pkp.classes.Helper.inherits(
@@ -61,9 +61,9 @@
 	$.pkp.pages.submission.SubmissionCategoriesFilterHandler.
 			prototype.assignCategory = function(sourceElement, event) {
 		if ($(sourceElement).is(':checked')) {
-			$(sourceElement).parents('li').appendTo('.assigned_categories');
+			$(sourceElement).parents('li').appendTo('.assigned_categories ul');
 		} else {
-			$(sourceElement).parents('li').appendTo('.unassigned_categories');
+			$(sourceElement).parents('li').appendTo('.unassigned_categories ul');
 		}
 	};
 
@@ -79,7 +79,7 @@
 		var self = this,
 				filter = self.formatText(
 						$(sourceElement).val());
-		$('.unassigned_categories li').filter(function() {
+		$('.unassigned_categories ul li').filter(function() {
 			var category = self.formatText(
 					$('label', this).text());
 			$(this).toggle(category.indexOf(filter) > -1);

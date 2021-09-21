@@ -10,31 +10,30 @@
 <script>
 	// Initialise JS handler.
 	$(function() {ldelim}
-		$('#categoriesFilter').pkpHandler(
+		$('#pkp_submissionCategories').pkpHandler(
 			'$.pkp.pages.submission.SubmissionCategoriesFilterHandler'
 		);
 	{rdelim});
 </script>
 
-<div class="pkp_categories_filter" id="categoriesFilter">
-	<input type="text" name="searchCategories" id="searchCategories" placeholder="{translate key="common.search"}">
-	<label for="searchCategories" class="-screenReader">
-		{translate key="common.search"}
-	</label>
-    <div class="categories_list">
-        <div class="unassigned_categories">
+{fbvFormArea title="grid.category.categories" id="pkp_submissionCategories"}
+    {fbvFormSection}
+        {fbvElement type="text" label="common.search" multilingual="true" name="searchCategories" id="searchCategories" value=$searchCategories maxlength="255" aria-controls="categoriesList"}
+    {/fbvFormSection}
+    <div class="categories_list" id="categoriesList" aria-live="true">
+        {fbvFormSection class="unassigned_categories" list="true"}
             {foreach from=$categories item="category" key="id"}
                 {if !in_array($id, $assignedCategories)}
                     {fbvElement type="checkbox" id="categories[]" value=$id checked=in_array($id, $assignedCategories) label=$category translate=false}
                 {/if}
             {/foreach}
-        </div>
-        <div class="assigned_categories">
+        {/fbvFormSection}   
+        {fbvFormSection class="assigned_categories" list="true"}
             {foreach from=$categories item="category" key="id"}
                 {if in_array($id, $assignedCategories)}
                     {fbvElement type="checkbox" id="categories[]" value=$id checked=in_array($id, $assignedCategories) label=$category translate=false}
                 {/if}
             {/foreach}
-        </div>
+        {/fbvFormSection}
     </div>
-</div>
+{/fbvFormArea}

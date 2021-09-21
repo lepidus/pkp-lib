@@ -18,14 +18,15 @@
 			{/foreach}
         {/fbvFormSection}
     {else}
-        {fbvFormSection list=true title="grid.category.categories"}
+        
         {if count($categories) > 10}
             {include file="submission/form/categoriesFilter.tpl"}
         {else}
-            {foreach from=$categories item="category" key="id"}
-                {fbvElement type="checkbox" id="categories[]" value=$id checked=in_array($id, $assignedCategories) label=$category translate=false}
-            {/foreach}
+            {fbvFormSection title="grid.category.categories" list=true}
+                {foreach from=$categories item="category" key="id"}
+                    {fbvElement type="checkbox" id="categories[]" value=$id checked=in_array($id, $assignedCategories) label=$category translate=false}
+                {/foreach}
+            {/fbvFormSection}
         {/if}
-        {/fbvFormSection}
     {/if}
 {/if}
