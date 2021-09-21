@@ -79,7 +79,7 @@
 		var self = this,
 				filter = self.formatText(
 						$(sourceElement).val());
-		$('.categories_list li').filter(function() {
+		$('.unassigned_categories li').filter(function() {
 			var category = self.formatText(
 					$('label', this).text());
 			$(this).toggle(category.indexOf(filter) > -1);
