@@ -98,6 +98,16 @@ class VersionCheck
                     $version['patch'][$patch['from']] = (string) $patch;
                 }
             }
+
+            if (isset($xml->compatibility)) {
+                $version['compatibility'] = [];
+                foreach ($xml->compatibility as $compatibility) {
+                    $application = (string) $compatibility['application'];
+                    foreach ($compatibility->release as $compatibleRelease) {
+                        $version['compatibility'][$application][] = (string) $compatibleRelease;
+                    }
+                }
+            }
             return $version;
         });
 
@@ -144,7 +154,33 @@ class VersionCheck
             }
         }
 
+        self::checkPluginVersionCompatibility($versionInfo);
+
         return $pluginVersion;
+    }
+
+    public static function checkPluginVersionCompatibility($versionInfo)
+    {
+        $application = Application::get();
+        $compatibility = $versionInfo['compatibility'];
+
+        if (!isset($compatibility[$application->getName()])) {
+            throw new Exception(__('manager.plugins.incompatiblePlugin.application'));
+        }
+
+        $compatibleVersions = $compatibility[$application->getName()];
+        $applicationVersion = $application->getCurrentVersion();
+        $hasCompatibleVersion = false;
+        foreach ($compatibleVersions as $compatibleVersion) {
+            if ($applicationVersion->isCompatible($compatibleVersion)) {
+                $hasCompatibleVersion = true;
+                break;
+            }
+        }
+
+        if (!$hasCompatibleVersion) {
+            throw new Exception(__('manager.plugins.incompatiblePlugin.version'));
+        }
     }
 
     /**
