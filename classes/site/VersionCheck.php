@@ -164,11 +164,9 @@ class VersionCheck
     /**
      * Checks whether the given plugin version is compatible with the current application version.
      *
-     * @param array $versionInfo
-     *
      * @throws Exception if the plugin version is not compatible
      */
-    public static function checkPluginVersionCompatibility($versionInfo): void
+    public static function checkPluginVersionCompatibility(array $versionInfo): void
     {
         $application = Application::get();
         $compatibility = $versionInfo['compatibility'];
@@ -179,17 +177,14 @@ class VersionCheck
 
         $compatibleVersions = $compatibility[$application->getName()];
         $applicationVersion = $application->getCurrentVersion();
-        $hasCompatibleVersion = false;
         foreach ($compatibleVersions as $compatibleVersion) {
             if ($applicationVersion->isCompatible($compatibleVersion)) {
-                $hasCompatibleVersion = true;
-                break;
+                return; // A compatible version was found
             }
         }
 
-        if (!$hasCompatibleVersion) {
-            throw new Exception(__('manager.plugins.incompatiblePlugin.version'));
-        }
+        // There was no compatible version found.
+        throw new Exception(__('manager.plugins.incompatiblePlugin.version'));
     }
 
     /**
